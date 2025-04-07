@@ -15,18 +15,17 @@ namespace Library.eCommerce.Models
         public int Id { get; set; }
         public ProductDTO Product { get; set; }
         public int? Quantity { get; set; }
-
         public ICommand? AddCommand { get; set; }
 
         public override string ToString()
         {
-            return $"{Product} Quantity:{Quantity}";
+            return $"{Product}\tQuantity: {Quantity}";
         }
 
-        public string Display { 
+        public string Display {
             get
             {
-                return $"{Product?.Display ?? string.Empty} {Quantity}";
+                return ToString();
             }
         }
 

@@ -20,7 +20,7 @@ namespace Maui.eCommerce.ViewModels
 
             set
             {
-                if(Model != null && Model.Product?.Name != value)
+                if( Model != null && Model.Product.Name != value)
                 {
                     Model.Product.Name = value;
                 }
@@ -39,6 +39,22 @@ namespace Maui.eCommerce.ViewModels
                 if( Model != null && Model.Quantity != value)
                 {
                     Model.Quantity = value;
+                }
+            }
+        }
+
+        public decimal? Price
+        {
+            get
+            {
+                return Model?.Product.Price;
+            }
+
+            set
+            {
+                if ( Model != null && Model.Product.Price != value)
+                {
+                    Model.Product.Price = Decimal.Round(value ?? 0, 2);
                 }
             }
         }

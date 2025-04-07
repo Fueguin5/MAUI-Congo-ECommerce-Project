@@ -3,24 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui.eCommerce.Views.ProductDetails"
              Title="ProductDetails"
-             NavigatedTo="ContentPage_NavigatedTo"
-             >
-    <VerticalStackLayout>
-        <Label 
-            Text="Name:"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Entry
-            Text="{Binding Name}"
-            />
-        <Label 
-            Text="Quantity:"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Entry
-            Text="{Binding Quantity}"
-            />
-        <Button Text="Ok" Clicked="OkClicked"/>
-        <Button Text="Go Back" Clicked="GoBackClicked"/>
-    </VerticalStackLayout>
+             NavigatedTo="ContentPage_NavigatedTo">
+
+    <Grid Margin="0,3">
+        <!-- Row Definitions for Outer Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Border with Nested Grid -->
+        <Border Stroke="#AC99EA" StrokeThickness="2" Margin="6,3"  Padding="2" Grid.Row="0" StrokeShape="RoundRectangle 10,10,10,10">
+            <Grid>
+                <!-- Row Definitions for Inner Grid (Nested Grids) -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name Label and Entry -->
+                <Grid Grid.Row="0" Margin="3,0" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Text="Name:" VerticalOptions="Center" HorizontalOptions="Center" Margin="3,3"/>
+                    <Entry Grid.Row="1" Text="{Binding Name}" Margin="3,3"/>
+                </Grid>
+
+                <!-- Quantity Label and Entry -->
+                <Grid Grid.Row="1" Margin="3,0" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Text="Quantity:" VerticalOptions="Center" HorizontalOptions="Center" Margin="3,3"/>
+                    <Entry Grid.Row="1" Text="{Binding Quantity}" Margin="3,3"/>
+                </Grid>
+
+                <!-- Price Label and Entry -->
+                <Grid Grid.Row="2" Margin="3,0" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Text="Price:" VerticalOptions="Center" HorizontalOptions="Center" Margin="3,3"/>
+                    <Entry Grid.Row="1" Text="{Binding Price, StringFormat='{0:F2}'}" Margin="3,3"/>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Ok Button -->
+        <Button Grid.Row="1" Text="Ok" Clicked="OkClicked" Margin="6,3" />
+
+        <!-- Go Back Button -->
+        <Button Grid.Row="2" Text="Go Back" Clicked="GoBackClicked" Margin="6,3" />
+    </Grid>
 </ContentPage>

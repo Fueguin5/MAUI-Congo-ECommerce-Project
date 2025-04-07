@@ -13,11 +13,13 @@ namespace Spring2025_Samples.Models
 
         public string? Name { get; set; }
 
+        public decimal? Price { get; set; }
+
         public string? Display
         {
             get
             {
-                return $"{Id}. {Name}";
+                return $"{Id}. {Name}\tPrice: ${(Price.HasValue ? Price.Value.ToString("F2") : "0.00")}";
             }
         }
 
@@ -31,12 +33,14 @@ namespace Spring2025_Samples.Models
         public Product()
         {
             Name = string.Empty;
+            Price = 0;
         }
 
         public Product(Product p)
         {
             Name = p.Name;
             Id = p.Id;
+            Price = p.Price;
         }
 
         public override string ToString()
@@ -48,6 +52,7 @@ namespace Spring2025_Samples.Models
         {
             Name = p.Name;
             Id = p.Id;
+            Price = p.Price;
             LegacyProperty1 = string.Empty;
         }
     }

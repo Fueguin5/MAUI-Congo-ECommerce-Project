@@ -15,9 +15,9 @@ namespace Library.eCommerce.Services
         {
             Products = new List<Item?>
             {
-                new Item{ Product = new ProductDTO{Id = 1, Name ="Product 1"}, Id = 1, Quantity = 1 },
-                new Item{ Product = new ProductDTO{Id = 2, Name ="Product 2"}, Id = 2 , Quantity = 2 },
-                new Item{ Product = new ProductDTO{Id = 3, Name ="Product 3"}, Id=3 , Quantity = 3 }
+                new Item{ Product = new ProductDTO{Id = 1, Name ="Product1", Price = 1}, Id = 1, Quantity = 1 },
+                new Item{ Product = new ProductDTO{Id = 2, Name ="Product2", Price = 2}, Id = 2 , Quantity = 2 },
+                new Item{ Product = new ProductDTO{Id = 3, Name ="Product3", Price = 3}, Id = 3 , Quantity = 3 }
             };
         }
 
@@ -57,7 +57,10 @@ namespace Library.eCommerce.Services
 
         public Item AddOrUpdate(Item item)
         {
-            if(item.Id == 0)
+            if (item == null)
+            {
+                return null;
+            } else if(item.Id == 0)
             {
                 item.Id = LastKey + 1;
                 item.Product.Id = item.Id;
@@ -69,7 +72,6 @@ namespace Library.eCommerce.Services
                 Products.RemoveAt(index);
                 Products.Insert(index,new Item(item));
             }
-
 
             return item;
         }
@@ -91,8 +93,5 @@ namespace Library.eCommerce.Services
         {
             return Products.FirstOrDefault(p => p.Id == id);
         }
-
     }
-
-    
 }
