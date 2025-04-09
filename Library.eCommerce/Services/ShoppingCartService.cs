@@ -11,7 +11,7 @@ namespace Library.eCommerce.Services
         {
             get
             {
-                CleanupOrphanedCartItems();
+                CleanupCartItems();
                 return items;
             }
         }
@@ -77,11 +77,30 @@ namespace Library.eCommerce.Services
             return cartItem;
         }
 
-        public void CleanupOrphanedCartItems()
+        public void CleanupCartItems()
         {
             items = items
-                .Where(ci => _prodSvc.GetById(ci.InventoryItem.Id) != null)
+                .Where(ci => _prodSvc.GetById(ci.InventoryItem.Id) != null) // Remove orphaned items
+                .OrderBy(ci => ci.InventoryItem.Id) // Sort by InventoryItem Id
                 .ToList();
+        }
+
+        public void CheckoutCart()
+        {
+            items.Clear();
+        }
+
+        public void ClearCart()
+        {
+            foreach (var cartItem in items)
+            {
+                var invItem = _prodSvc.GetById(cartItem.InventoryItem.Id);
+                if (invItem != null)
+                {
+                    invItem.Quantity += cartItem.Quantity;
+                }
+            }
+            items.Clear();
         }
     }
 }

@@ -9,8 +9,8 @@
         <viewmodels:CheckoutViewModel />
     </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="Auto, *, Auto"
-          Margin="12,10">
+    <Grid RowDefinitions="Auto, *, Auto, Auto, Auto"
+          Margin="6,3">
 
         <!-- Header -->
         <Label Grid.Row="0"
@@ -40,8 +40,8 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <Label Text="Name" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
-                    <Label Text="Quantity" Grid.Column="1" HorizontalOptions="Start" Padding="5,5"/>
-                    <Label Text="Price" Grid.Column="2" HorizontalOptions="Start" Padding="5,5"/>
+                    <Label Text="Quantity" Grid.Column="1" HorizontalOptions="Center" Padding="5,5"/>
+                    <Label Text="Total Price" Grid.Column="2" HorizontalOptions="End" Padding="5,5"/>
                 </Grid>
 
                 <!-- List Items (Products in Cart) -->
@@ -56,8 +56,8 @@
                                         <ColumnDefinition Width="2*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding InventoryItem.Product.Name}" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
-                                    <Label Text="{Binding Quantity}" Grid.Column="1" HorizontalOptions="Start" Padding="5,5"/>
-                                    <Label Text="{Binding InventoryItem.Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,5"/>
+                                    <Label Text="{Binding Quantity}" Grid.Column="1" HorizontalOptions="Center" Padding="5,5"/>
+                                    <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="End" Padding="5,5"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -67,19 +67,29 @@
         </Border>
 
         <!-- Totals Section -->
-        <Grid Grid.Row="2"
-              RowDefinitions="Auto, Auto, Auto"
-              ColumnDefinitions="*,Auto"
-              Margin="0,10,0,0"
-              Padding="6">
-            <Label Grid.Row="0" Grid.Column="0" Text="Subtotal:" FontSize="16" HorizontalOptions="End" Padding="5,5"/>
-            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Subtotal, StringFormat='${0:F2}'}" FontSize="16" Padding="5,5"/>
+        <Grid Grid.Row="2" RowDefinitions="Auto, Auto, Auto" Margin="0,3">
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Subtotal}" FontSize="16" HorizontalOptions="End"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Tax}" FontSize="16" HorizontalOptions="End"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="{Binding Total}" FontSize="18" FontAttributes="Bold" HorizontalOptions="End"/>
+        </Grid>
 
-            <Label Grid.Row="1" Grid.Column="0" Text="Tax:" FontSize="16" HorizontalOptions="End" Padding="5,5"/>
-            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Tax, StringFormat='${0:F2}'}" FontSize="16" Padding="5,5"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Text="Total:" FontSize="18" FontAttributes="Bold" HorizontalOptions="End" Padding="5,5"/>
-            <Label Grid.Row="2" Grid.Column="1" Text="{Binding Total, StringFormat='${0:F2}'}" FontSize="18" FontAttributes="Bold" Padding="5,5"/>
+        <!-- Confirm button row -->
+        <Grid Grid.Row="3" ColumnSpacing="0" RowSpacing="0" Margin="0,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Confirm" Grid.Column="0" Clicked="ConfirmClicked"/>
+        </Grid>
+
+        <!-- Go Back button row -->
+        <Grid Grid.Row="4" ColumnSpacing="0" RowSpacing="0" Margin="0,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Go Back" Grid.Column="0" Clicked="CancelClicked"/>
         </Grid>
 
     </Grid>

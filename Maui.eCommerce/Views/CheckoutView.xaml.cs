@@ -15,4 +15,14 @@ public partial class CheckoutView : ContentPage
 
         (BindingContext as CheckoutViewModel)?.RefreshUX();
     }
+    private void ConfirmClicked(object sender, EventArgs e)
+    {
+        (BindingContext as CheckoutViewModel)?.CheckoutCart();
+        Shell.Current.GoToAsync("//MainPage");
+    }
+
+    private void CancelClicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//ShoppingManagement");
+    }
 }

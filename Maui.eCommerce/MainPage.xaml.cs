@@ -4,12 +4,11 @@ namespace Maui.eCommerce
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = this;
+            BindingContext = new MainViewModel();
         }
 
         private void InventoryClicked(object sender, EventArgs e)
