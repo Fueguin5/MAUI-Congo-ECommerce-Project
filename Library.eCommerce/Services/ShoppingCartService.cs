@@ -5,83 +5,83 @@ namespace Library.eCommerce.Services
     public class ShoppingCartService
     {
         private ProductServiceProxy _prodSvc = ProductServiceProxy.Current;
-        private List<Item> items;
-        public List<Item> CartItems
+        private List<CartItem> items;
+
+        public List<CartItem> CartItems
         {
             get
             {
+                CleanupOrphanedCartItems();
                 return items;
             }
         }
-        public static ShoppingCartService Current {  
+
+        public static ShoppingCartService Current
+        {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new ShoppingCartService();
                 }
-
                 return instance;
-            } 
-        }
-        private static ShoppingCartService? instance;
-        private ShoppingCartService() { 
-            items = new List<Item>();
+            }
         }
 
-        public Item? AddOrUpdate(Item item)
+        private static ShoppingCartService? instance;
+
+        private ShoppingCartService()
+        {
+            items = new List<CartItem>();
+        }
+
+        public CartItem? AddOrUpdate(Item item)
         {
             var existingInvItem = _prodSvc.GetById(item.Id);
-            if(existingInvItem == null || existingInvItem.Quantity == 0) {
+            if (existingInvItem == null || existingInvItem.Quantity == 0)
                 return null;
-            }
 
-            if (existingInvItem != null)
+            existingInvItem.Quantity--;
+
+            var existingCartItem = items.FirstOrDefault(ci => ci.InventoryItem.Id == item.Id);
+            if (existingCartItem == null)
             {
-                existingInvItem.Quantity--;
+                var cartItem = new CartItem(existingInvItem);
+                items.Add(cartItem);
+                return cartItem;
             }
-
-            var existingItem = CartItems.FirstOrDefault(i => i.Id == item.Id);
-            if(existingItem == null)
+            else
             {
-                //add
-                var newItem = new Item(item);
-                newItem.Quantity = 1;
-                CartItems.Add(newItem);
-            } else
-            {
-                //update
-                existingItem.Quantity++;
+                existingCartItem.Quantity++;
+                return existingCartItem;
             }
-
-
-            return existingInvItem;
         }
 
-        public Item? ReturnItem(Item? item)
+        public CartItem? ReturnItem(Item item)
         {
-            if (item?.Id <= 0 || item == null)
+            var cartItem = items.FirstOrDefault(ci => ci.InventoryItem.Id == item.Id);
+            if (cartItem == null) return null;
+
+            cartItem.Quantity--;
+            if (cartItem.Quantity <= 0)
             {
-                return null;
+                items.Remove(cartItem);
             }
 
-            var itemToReturn = CartItems.FirstOrDefault(c => c.Id == item.Id);
-            if (itemToReturn != null)
+            var invItem = _prodSvc.GetById(item.Id);
+            if (invItem != null)
             {
-                itemToReturn.Quantity--;
-                var inventoryItem = _prodSvc.Products.FirstOrDefault(p => p.Id == itemToReturn.Id); ;
-                if(inventoryItem == null)
-                {
-                    _prodSvc.AddOrUpdate(new Item(itemToReturn));
-                } else
-                {
-                    inventoryItem.Quantity++;
-                }
+                invItem.Quantity++;
             }
 
-
-            return itemToReturn;
+            return cartItem;
         }
 
+        public void CleanupOrphanedCartItems()
+        {
+            items = items
+                .Where(ci => _prodSvc.GetById(ci.InventoryItem.Id) != null)
+                .ToList();
+        }
     }
 }

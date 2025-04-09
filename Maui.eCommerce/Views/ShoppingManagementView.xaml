@@ -133,9 +133,9 @@
                                                 <ColumnDefinition Width="2*"/>
                                                 <ColumnDefinition Width="3*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
-                                            <Label Text="{Binding Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
-                                            <Label Text="{Binding Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
+                                            <Label Text="{Binding InventoryItem.Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
+                                            <Label Text="{Binding InventoryItem.Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
+                                            <Label Text="{Binding InventoryItem.Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
                                             <Label Text="{Binding Quantity}" Grid.Column="3" HorizontalOptions="Start" Padding="5,0"/>
                                         </Grid>
                                     </ViewCell>

@@ -15,8 +15,8 @@ namespace Maui.eCommerce.ViewModels
     {
         private ProductServiceProxy _invSvc = ProductServiceProxy.Current;
         private ShoppingCartService _cartSvc = ShoppingCartService.Current;
-       public Item? SelectedItem { get; set; }
-       public Item? SelectedCartItem { get; set; }
+        public Item? SelectedItem { get; set; }
+        public CartItem? SelectedCartItem { get; set; }
 
         public ObservableCollection<Item?> Inventory
         {
@@ -28,11 +28,11 @@ namespace Maui.eCommerce.ViewModels
             }
         }
 
-        public ObservableCollection<Item?> ShoppingCart
+        public ObservableCollection<CartItem?> ShoppingCart
         {
             get
             {
-                return new ObservableCollection<Item?>(_cartSvc.CartItems
+                return new ObservableCollection<CartItem?>(_cartSvc.CartItems
                     .Where(i => i?.Quantity > 0)
                     );
             }
@@ -75,7 +75,7 @@ namespace Maui.eCommerce.ViewModels
             if (SelectedCartItem != null) {
                 var shouldRefresh = SelectedCartItem.Quantity >= 1;
                 
-                var updatedItem = _cartSvc.ReturnItem(SelectedCartItem);
+                var updatedItem = _cartSvc.ReturnItem(SelectedCartItem.InventoryItem);
 
                 if (updatedItem != null && shouldRefresh)
                 {
