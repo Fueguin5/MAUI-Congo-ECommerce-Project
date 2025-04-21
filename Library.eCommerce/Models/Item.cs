@@ -16,6 +16,7 @@ namespace Library.eCommerce.Models
         public ProductDTO Product { get; set; }
         public int? Quantity { get; set; }
         public int? AddQuantity { get; set; }
+        public int? RemoveQuantity { get; set; }
 
         public ICommand? AddCommand { get; set; }
 

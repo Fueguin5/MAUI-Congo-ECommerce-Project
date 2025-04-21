@@ -81,7 +81,7 @@
                                                 <Label Text="{Binding Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
                                                 <Label Text="{Binding Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
                                                 <Label Text="{Binding Quantity}" Grid.Column="3" HorizontalOptions="Start" Padding="5,0"/>
-                                                <Entry Text="{Binding AddQuantity}" Grid.Column="4" Focused="EntryFocused" Margin="3,0"/>
+                                                <Entry Text="{Binding AddQuantity}" Grid.Column="4" Focused="InventoryEntryFocused" Margin="3,0"/>
                                                 <Button Text="+" Grid.Column="5" Clicked="InlineAddClicked" Margin="3,0"/>
                                             </Grid>
                                         </Frame>
@@ -122,6 +122,8 @@
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Label Text="ID" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
                             <Label Text="Name" Grid.Column="1" HorizontalOptions="Start" Padding="5,5"/>
@@ -130,22 +132,28 @@
                         </Grid>
 
                         <!-- List Items (Shopping Cart) -->
-                        <ListView Grid.Row="1" ItemsSource="{Binding ShoppingCart}" SelectedItem="{Binding SelectedCartItem}">
+                        <ListView Grid.Row="1" ItemsSource="{Binding ShoppingCart}" SelectedItem="{Binding SelectedCartItem, Mode=TwoWay}" HasUnevenRows="True" SeparatorVisibility="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="1*"/>
-                                                <ColumnDefinition Width="4*"/>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="3*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding InventoryItem.Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
-                                            <Label Text="{Binding InventoryItem.Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
-                                            <Label Text="{Binding InventoryItem.Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
-                                            <Label Text="{Binding Quantity}" Grid.Column="3" HorizontalOptions="Start" Padding="5,0"/>
-                                        </Grid>
+                                        <Frame Margin="5" Padding="0" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent" CornerRadius="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding InventoryItem.Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
+                                                <Label Text="{Binding InventoryItem.Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
+                                                <Label Text="{Binding InventoryItem.Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
+                                                <Label Text="{Binding Quantity}" Grid.Column="3" HorizontalOptions="Start" Padding="5,0"/>
+                                                <Entry Text="{Binding InventoryItem.RemoveQuantity}" Grid.Column="4" Focused="ShoppingEntryFocused" Margin="3,0"/>
+                                                <Button Text="-" Grid.Column="5" Clicked="InlineRemoveClicked" Margin="3,0"/>
+                                            </Grid>
+                                        </Frame>
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

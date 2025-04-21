@@ -25,11 +25,24 @@ namespace Maui.eCommerce.ViewModels
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
-                    NotifyPropertyChanged(nameof(SelectedItem));  // Notify UI about the change
+                    NotifyPropertyChanged(nameof(SelectedItem));
                 }
             }
         }
-        public CartItem? SelectedCartItem { get; set; }
+
+        private CartItem? _selectedCartItem;
+        public CartItem? SelectedCartItem
+        {
+            get => _selectedCartItem;
+            set
+            {
+                if (_selectedCartItem != value)
+                {
+                    _selectedCartItem = value;
+                    NotifyPropertyChanged(nameof(SelectedCartItem));
+                }
+            }
+        }
 
         public ObservableCollection<Item?> Inventory
         {
@@ -125,9 +138,41 @@ namespace Maui.eCommerce.ViewModels
             }
         }
 
-        public void EntryClicked(Item item)
+        public void ReturnQuantity()
+        {
+            if (SelectedCartItem != null)
+            {
+                var shouldRefresh = SelectedCartItem.InventoryItem.RemoveQuantity >= 1;
+                CartItem? updatedItem = null;
+                var tempQuantity = SelectedCartItem.Quantity;
+                for (int i = 0; i < SelectedCartItem.InventoryItem.RemoveQuantity && i < tempQuantity; i++)
+                {
+                    CartItem? temp = _cartSvc.ReturnItem(SelectedCartItem.InventoryItem);
+
+                    if (temp != null)
+                    {
+                        updatedItem = temp;
+                    }
+                }
+
+                SelectedCartItem.InventoryItem.RemoveQuantity = null;
+
+                if (updatedItem != null && shouldRefresh)
+                {
+                    NotifyPropertyChanged(nameof(Inventory));
+                    NotifyPropertyChanged(nameof(ShoppingCart));
+                }
+            }
+        }
+
+        public void InventoryEntryClicked(Item item)
         {
             SelectedItem = item;
+        }
+
+        public void ShoppingEntryClicked(CartItem cartitem)
+        {
+            SelectedCartItem = cartitem;
         }
     }
 }

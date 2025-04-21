@@ -13,7 +13,7 @@ namespace Library.eCommerce.Models
     public class CartItem
     {
         public Item InventoryItem { get; private set; }
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
         public decimal? TotalPrice => InventoryItem?.Product.Price * Quantity;
 
         public CartItem(Item inventoryItem)

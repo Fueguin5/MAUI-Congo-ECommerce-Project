@@ -31,6 +31,11 @@ public partial class ShoppingManagementView : ContentPage
         (BindingContext as ShoppingManagementViewModel).PurchaseQuantity();
     }
 
+    private void InlineRemoveClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ShoppingManagementViewModel).ReturnQuantity();
+    }
+
     private void CancelClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//MainPage");
@@ -41,11 +46,19 @@ public partial class ShoppingManagementView : ContentPage
         Shell.Current.GoToAsync("//Checkout");
     }
 
-    private void EntryFocused(object sender, FocusEventArgs e)
+    private void InventoryEntryFocused(object sender, FocusEventArgs e)
     {
         if (sender is Entry entry && entry.BindingContext is Item item)
         {
-            (BindingContext as ShoppingManagementViewModel).EntryClicked(item);
+            (BindingContext as ShoppingManagementViewModel).InventoryEntryClicked(item);
+        }
+    }
+
+    private void ShoppingEntryFocused(object sender, FocusEventArgs e)
+    {
+        if (sender is Entry entry && entry.BindingContext is CartItem cartitem)
+        {
+            (BindingContext as ShoppingManagementViewModel).ShoppingEntryClicked(cartitem);
         }
     }
 }
