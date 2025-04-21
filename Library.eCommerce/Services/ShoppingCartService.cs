@@ -7,6 +7,8 @@ namespace Library.eCommerce.Services
         private ProductServiceProxy _prodSvc = ProductServiceProxy.Current;
         private List<CartItem> items;
 
+        public decimal TaxRate { get; set; }
+
         public List<CartItem> CartItems
         {
             get
@@ -33,6 +35,7 @@ namespace Library.eCommerce.Services
         private ShoppingCartService()
         {
             items = new List<CartItem>();
+            TaxRate = 0.07m;
         }
 
         public CartItem? AddOrUpdate(Item item)

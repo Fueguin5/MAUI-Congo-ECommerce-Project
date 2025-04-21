@@ -20,6 +20,10 @@ namespace Maui.eCommerce
         {
             Shell.Current.GoToAsync("//ShoppingManagement");
         }
-    }
 
+        private void ConfigClicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//ConfigManagement");
+        }
+    }
 }

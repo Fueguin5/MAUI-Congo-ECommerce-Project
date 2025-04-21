@@ -15,7 +15,20 @@ namespace Maui.eCommerce.ViewModels
     {
         private ProductServiceProxy _invSvc = ProductServiceProxy.Current;
         private ShoppingCartService _cartSvc = ShoppingCartService.Current;
-        public Item? SelectedItem { get; set; }
+        
+        private Item? _selectedItem;
+        public Item? SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    NotifyPropertyChanged(nameof(SelectedItem));  // Notify UI about the change
+                }
+            }
+        }
         public CartItem? SelectedCartItem { get; set; }
 
         public ObservableCollection<Item?> Inventory
@@ -72,9 +85,9 @@ namespace Maui.eCommerce.ViewModels
 
         public void ReturnItem()
         {
-            if (SelectedCartItem != null) {
+            if (SelectedCartItem != null) 
+            {
                 var shouldRefresh = SelectedCartItem.Quantity >= 1;
-                
                 var updatedItem = _cartSvc.ReturnItem(SelectedCartItem.InventoryItem);
 
                 if (updatedItem != null && shouldRefresh)
@@ -83,6 +96,38 @@ namespace Maui.eCommerce.ViewModels
                     NotifyPropertyChanged(nameof(ShoppingCart));
                 }
             }
+        }
+
+        public void PurchaseQuantity()
+        {
+            if (SelectedItem != null)
+            {
+                var shouldRefresh = SelectedItem.AddQuantity >= 1;
+                CartItem? updatedItem = null;
+                var tempQuantity = SelectedItem.Quantity;
+                for (int i = 0; i < SelectedItem.AddQuantity && i < tempQuantity; i++)
+                {
+                    CartItem? temp = _cartSvc.AddOrUpdate(SelectedItem);
+
+                    if (temp != null)
+                    {
+                        updatedItem = temp;
+                    }
+                }
+
+                SelectedItem.AddQuantity = null;
+
+                if (updatedItem != null && shouldRefresh)
+                {
+                    NotifyPropertyChanged(nameof(Inventory));
+                    NotifyPropertyChanged(nameof(ShoppingCart));
+                }
+            }
+        }
+
+        public void EntryClicked(Item item)
+        {
+            SelectedItem = item;
         }
     }
 }

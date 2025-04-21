@@ -53,6 +53,8 @@
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Label Text="ID" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
                             <Label Text="Name" Grid.Column="1" HorizontalOptions="Start" Padding="5,5"/>
@@ -61,7 +63,7 @@
                         </Grid>
 
                         <!-- List Items -->
-                        <ListView Grid.Row="1" ItemsSource="{Binding Inventory}" SelectedItem="{Binding SelectedItem}">
+                        <ListView Grid.Row="1" ItemsSource="{Binding Inventory}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -71,11 +73,15 @@
                                                 <ColumnDefinition Width="4*"/>
                                                 <ColumnDefinition Width="2*"/>
                                                 <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="3*"/>
                                             </Grid.ColumnDefinitions>
                                             <Label Text="{Binding Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
                                             <Label Text="{Binding Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
                                             <Label Text="{Binding Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
                                             <Label Text="{Binding Quantity}" Grid.Column="3" HorizontalOptions="Start" Padding="5,0"/>
+                                            <Entry Text="{Binding AddQuantity}" Grid.Column="4" Focused="EntryFocused" Margin="3,0"/>
+                                            <Button Text="+" Grid.Column="5" Clicked="InlineAddClicked" Margin="3,0"/>
                                         </Grid>
                                     </ViewCell>
                                 </DataTemplate>

@@ -4,7 +4,7 @@
              x:Class="Maui.eCommerce.MainPage"
              Title="Main Menu">
 
-    <Grid RowDefinitions="Auto, *, *"
+    <Grid RowDefinitions="Auto, *, *, *"
           Padding="12,10"
           RowSpacing="15">
 
@@ -29,6 +29,14 @@
                 FontSize="18"
                 Padding="10"
                 Clicked="ShopClicked"
+                HorizontalOptions="Fill" />
+
+        <!-- Config Button -->
+        <Button Grid.Row="3"
+                Text="Config"
+                FontSize="18"
+                Padding="10"
+                Clicked="ConfigClicked"
                 HorizontalOptions="Fill" />
 
     </Grid>

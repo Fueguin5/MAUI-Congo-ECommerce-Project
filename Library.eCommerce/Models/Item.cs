@@ -15,6 +15,8 @@ namespace Library.eCommerce.Models
         public int Id { get; set; }
         public ProductDTO Product { get; set; }
         public int? Quantity { get; set; }
+        public int? AddQuantity { get; set; }
+
         public ICommand? AddCommand { get; set; }
 
         public override string ToString()

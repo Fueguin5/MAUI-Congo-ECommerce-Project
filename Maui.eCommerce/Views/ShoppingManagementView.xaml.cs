@@ -1,4 +1,5 @@
 using Maui.eCommerce.ViewModels;
+using Library.eCommerce.Models;
 
 namespace Maui.eCommerce.Views;
 
@@ -27,7 +28,7 @@ public partial class ShoppingManagementView : ContentPage
 
     private void InlineAddClicked(object sender, EventArgs e)
     {
-        (BindingContext as ShoppingManagementViewModel).RefreshUX();
+        (BindingContext as ShoppingManagementViewModel).PurchaseQuantity();
     }
 
     private void CancelClicked(object sender, EventArgs e)
@@ -38,5 +39,13 @@ public partial class ShoppingManagementView : ContentPage
     private void CheckoutClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//Checkout");
+    }
+
+    private void EntryFocused(object sender, FocusEventArgs e)
+    {
+        if (sender is Entry entry && entry.BindingContext is Item item)
+        {
+            (BindingContext as ShoppingManagementViewModel).EntryClicked(item);
+        }
     }
 }
