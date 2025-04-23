@@ -10,6 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <!-- Search Section -->
+            <RowDefinition Height="Auto" />
+            <!-- Sort Section -->
             <RowDefinition Height="*" />
             <!-- Inventory Table -->
             <RowDefinition Height="Auto" />
@@ -32,8 +34,20 @@
             <Button Text="Search" Grid.Column="1" Clicked="SearchClicked" Margin="3,0"/>
         </Grid>
 
+        <!-- Sort Section -->
+        <Grid Grid.Row="1" Margin="3,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="Sort By Id" Grid.Column="0" Clicked="IdClicked" Margin="3,0"/>
+            <Button Text="Sort By Name" Grid.Column="1" Clicked="NameClicked" Margin="3,0"/>
+            <Button Text="Sort By Price" Grid.Column="2" Clicked="PriceClicked" Margin="3,0"/>
+        </Grid>
+
         <!-- Inventory List with Border -->
-        <Border Stroke="#AC99EA" StrokeThickness="2" Margin="6,3"  Padding="2" Grid.Row="1" StrokeShape="RoundRectangle 10,10,10,10">
+        <Border Stroke="#AC99EA" StrokeThickness="2" Margin="6,3"  Padding="2" Grid.Row="2" StrokeShape="RoundRectangle 10,10,10,10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -79,16 +93,16 @@
         </Border>
 
         <!-- Add Button -->
-        <Button Text="Add" Clicked="AddClicked" Grid.Row="2" Margin="6,3"/>
+        <Button Text="Add" Clicked="AddClicked" Grid.Row="3" Margin="6,3"/>
 
         <!-- Edit Button -->
-        <Button Text="Edit" Clicked="EditClicked" Grid.Row="3" Margin="6,3"/>
+        <Button Text="Edit" Clicked="EditClicked" Grid.Row="4" Margin="6,3"/>
 
         <!-- Delete Button -->
-        <Button Text="Delete" Clicked="DeleteClicked" Grid.Row="4" Margin="6,3"/>
+        <Button Text="Delete" Clicked="DeleteClicked" Grid.Row="5" Margin="6,3"/>
 
         <!-- Go Back Button -->
-        <Button Text="Go Back" Clicked="CancelClicked" Grid.Row="5" Margin="6,3"/>
+        <Button Text="Go Back" Clicked="CancelClicked" Grid.Row="6" Margin="6,3"/>
 
     </Grid>
 </ContentPage>

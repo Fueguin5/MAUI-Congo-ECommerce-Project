@@ -8,6 +8,8 @@ namespace Maui.eCommerce.ViewModels
 {
     public class ConfigViewModel : INotifyPropertyChanged
     {
+        private readonly ShoppingCartService _cartSvc = ShoppingCartService.Current;
+
         private decimal _taxRate;
         public decimal TaxRate
         {
@@ -38,13 +40,14 @@ namespace Maui.eCommerce.ViewModels
 
         public ConfigViewModel()
         {
-            TaxRate = 7.00m;
-            TempTaxRate = 7.00m;
+            TaxRate = 0.07m;
+            TempTaxRate = 0.07m;
         }
 
         public void UpdateTax()
         {
             TaxRate = TempTaxRate;
+            _cartSvc.TaxRate = TaxRate;
         }
 
         public void ResetTax()

@@ -18,6 +18,21 @@ public partial class ShoppingManagementView : ContentPage
         (BindingContext as ShoppingManagementViewModel)?.RefreshUX();
     }
 
+    private void IdClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ShoppingManagementViewModel)?.SortById();
+    }
+
+    private void NameClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ShoppingManagementViewModel)?.SortByName();
+    }
+
+    private void PriceClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ShoppingManagementViewModel)?.SortByPrice();
+    }
+
     private void RemoveFromCartClicked(object sender, EventArgs e)
     {
         (BindingContext as ShoppingManagementViewModel).ReturnItem();

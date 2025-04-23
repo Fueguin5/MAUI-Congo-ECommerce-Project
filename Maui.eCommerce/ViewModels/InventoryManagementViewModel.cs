@@ -17,6 +17,7 @@ namespace Maui.eCommerce.ViewModels
         public Item? SelectedProduct { get; set; }
         public string? Query { get; set; }
         private ProductServiceProxy _svc = ProductServiceProxy.Current;
+        private string SortProtocol = "Id";
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -39,7 +40,22 @@ namespace Maui.eCommerce.ViewModels
         {
             get
             {
-                var filteredList = _svc.Products.Where(p => p?.Product?.Name?.ToLower().Contains(Query?.ToLower() ?? string.Empty) ?? false);
+                var filteredList = _svc.Products
+                    .Where(p => p?.Product?.Name?.ToLower().Contains(Query?.ToLower() ?? string.Empty) ?? false);
+
+                if (SortProtocol == "Name")
+                {
+                    filteredList = filteredList.OrderBy(p => p?.Product?.Name);
+                }
+                else if (SortProtocol == "Price")
+                {
+                    filteredList = filteredList.OrderBy(p => p?.Product?.Price);
+                }
+                else
+                {
+                    filteredList = filteredList.OrderBy(p => p?.Product?.Id);
+                }
+
                 return new ObservableCollection<Item?>(filteredList);
             }
         }
@@ -49,6 +65,24 @@ namespace Maui.eCommerce.ViewModels
             var item = _svc.Delete(SelectedProduct?.Id ?? 0);
             NotifyPropertyChanged("Products");
             return item;
+        }
+
+        public void SortById()
+        {
+            SortProtocol = "Id";
+            RefreshProductList();
+        }
+
+        public void SortByName()
+        {
+            SortProtocol = "Name";
+            RefreshProductList();
+        }
+
+        public void SortByPrice()
+        {
+            SortProtocol = "Price";
+            RefreshProductList();
         }
     }
 }

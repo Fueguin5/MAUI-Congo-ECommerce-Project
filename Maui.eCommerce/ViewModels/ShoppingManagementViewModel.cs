@@ -15,7 +15,9 @@ namespace Maui.eCommerce.ViewModels
     {
         private ProductServiceProxy _invSvc = ProductServiceProxy.Current;
         private ShoppingCartService _cartSvc = ShoppingCartService.Current;
-        
+
+        private string SortProtocol = "Id";
+
         private Item? _selectedItem;
         public Item? SelectedItem
         {
@@ -48,9 +50,23 @@ namespace Maui.eCommerce.ViewModels
         {
             get
             {
-                return new ObservableCollection<Item?>(_invSvc.Products
-                    .Where(i => i?.Quantity > 0)
-                    );
+                var list = _invSvc.Products
+                    .Where(i => i?.Quantity > 0);
+
+                if (SortProtocol == "Name")
+                {
+                    list = list.OrderBy(i => i?.Product?.Name);
+                }
+                else if (SortProtocol == "Price")
+                {
+                    list = list.OrderBy(i => i?.Product?.Price);
+                }
+                else
+                {
+                    list = list.OrderBy(i => i?.Product?.Id);
+                }
+
+                return new ObservableCollection<Item?>(list);
             }
         }
 
@@ -58,9 +74,23 @@ namespace Maui.eCommerce.ViewModels
         {
             get
             {
-                return new ObservableCollection<CartItem?>(_cartSvc.CartItems
-                    .Where(i => i?.Quantity > 0)
-                    );
+                var list = _cartSvc.CartItems
+                    .Where(i => i?.Quantity > 0);
+
+                if (SortProtocol == "Name")
+                {
+                    list = list.OrderBy(i => i?.InventoryItem?.Product?.Name);
+                }
+                else if (SortProtocol == "Price")
+                {
+                    list = list.OrderBy(i => i?.InventoryItem?.Product?.Price);
+                }
+                else
+                {
+                    list = list.OrderBy(i => i?.InventoryItem?.Product?.Id);
+                }
+
+                return new ObservableCollection<CartItem?>(list);
             }
         }
 
@@ -173,6 +203,24 @@ namespace Maui.eCommerce.ViewModels
         public void ShoppingEntryClicked(CartItem cartitem)
         {
             SelectedCartItem = cartitem;
+        }
+
+        public void SortById()
+        {
+            SortProtocol = "Id";
+            RefreshUX();
+        }
+
+        public void SortByName()
+        {
+            SortProtocol = "Name";
+            RefreshUX();
+        }
+
+        public void SortByPrice()
+        {
+            SortProtocol = "Price";
+            RefreshUX();
         }
     }
 }

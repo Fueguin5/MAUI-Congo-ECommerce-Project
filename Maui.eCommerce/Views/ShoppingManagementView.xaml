@@ -6,6 +6,8 @@
 
     <Grid Margin="0,3">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Sort Section-->
             <RowDefinition Height="*"/>
             <!-- For inventory and shopping cart tables -->
             <RowDefinition Height="Auto"/>
@@ -16,7 +18,19 @@
             <!-- For the Go Back button -->
         </Grid.RowDefinitions>
 
-        <Grid ColumnSpacing="0" RowSpacing="0" Margin="3,3">
+        <!-- Sort Section -->
+        <Grid Grid.Row="0" Margin="3,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="Sort By Id" Grid.Column="0" Clicked="IdClicked" Margin="3,0"/>
+            <Button Text="Sort By Name" Grid.Column="1" Clicked="NameClicked" Margin="3,0"/>
+            <Button Text="Sort By Price" Grid.Column="2" Clicked="PriceClicked" Margin="3,0"/>
+        </Grid>
+
+        <Grid ColumnSpacing="0" Grid.Row="1" RowSpacing="0" Margin="3,3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <!-- Store Column -->
@@ -164,7 +178,7 @@
         </Grid>
 
         <!-- + and - buttons row -->
-        <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0" Margin="3,3">
+        <Grid Grid.Row="2" ColumnSpacing="0" RowSpacing="0" Margin="3,3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -175,7 +189,7 @@
         </Grid>
 
         <!-- Checkout button row -->
-        <Grid Grid.Row="2" ColumnSpacing="0" RowSpacing="0" Margin="6,3">
+        <Grid Grid.Row="3" ColumnSpacing="0" RowSpacing="0" Margin="6,3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -184,7 +198,7 @@
         </Grid>
 
         <!-- Go Back button row -->
-        <Grid Grid.Row="3" ColumnSpacing="0" RowSpacing="0" Margin="6,3">
+        <Grid Grid.Row="4" ColumnSpacing="0" RowSpacing="0" Margin="6,3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>

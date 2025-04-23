@@ -37,14 +37,14 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Label -->
-                <Label Text="Tax Rate (%)"
+                <Label Text="Tax Rate"
                        Grid.Row="0"
                        Grid.Column="0"
                        VerticalOptions="Center"
                        Padding="3,3"/>
 
                 <!-- Entry -->
-                <Entry Text="{Binding TempTaxRate, StringFormat='{0:F2}', Mode=TwoWay}"
+                <Entry Text="{Binding TempTaxRate, Mode=TwoWay}"
                        Keyboard="Numeric"
                        Grid.Row="0"
                        Grid.Column="1"
