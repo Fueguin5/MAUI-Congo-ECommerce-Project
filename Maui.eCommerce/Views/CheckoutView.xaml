@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui.eCommerce.Views.CheckoutView"
-             Title="Checkout"
              xmlns:viewmodels="clr-namespace:Maui.eCommerce.ViewModels">
 
     <ContentPage.BindingContext>
@@ -35,9 +34,9 @@
                 <!-- Header Row -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Text="Name" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
                     <Label Text="Quantity" Grid.Column="1" HorizontalOptions="Center" Padding="5,5"/>
@@ -51,9 +50,9 @@
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding InventoryItem.Product.Name}" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
                                     <Label Text="{Binding Quantity}" Grid.Column="1" HorizontalOptions="Center" Padding="5,5"/>
@@ -73,24 +72,17 @@
             <Label Grid.Row="2" Grid.Column="0" Text="{Binding Total}" FontSize="18" FontAttributes="Bold" HorizontalOptions="End"/>
         </Grid>
 
+        <!-- Confirm Button -->
+        <Button Grid.Row="3"
+                Text="Confirm"
+                Clicked="ConfirmClicked"
+                Margin="0,3" />
 
-        <!-- Confirm button row -->
-        <Grid Grid.Row="3" ColumnSpacing="0" RowSpacing="0" Margin="0,3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Text="Confirm" Grid.Column="0" Clicked="ConfirmClicked"/>
-        </Grid>
-
-        <!-- Go Back button row -->
-        <Grid Grid.Row="4" ColumnSpacing="0" RowSpacing="0" Margin="0,3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Text="Go Back" Grid.Column="0" Clicked="CancelClicked"/>
-        </Grid>
+        <!-- Back Button -->
+        <Button Grid.Row="4"
+                Text="Go Back"
+                Clicked="CancelClicked"
+                Margin="0,3" />
 
     </Grid>
 </ContentPage>

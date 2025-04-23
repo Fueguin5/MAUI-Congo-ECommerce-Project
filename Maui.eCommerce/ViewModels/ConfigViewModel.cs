@@ -24,8 +24,9 @@ namespace Maui.eCommerce.ViewModels
             }
         }
 
-        private decimal _tempTaxRate;
-        public decimal TempTaxRate
+        private string _tempTaxRate;
+
+        public string TempTaxRate
         {
             get => _tempTaxRate;
             set
@@ -33,26 +34,53 @@ namespace Maui.eCommerce.ViewModels
                 if (_tempTaxRate != value)
                 {
                     _tempTaxRate = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(TempTaxRate));
                 }
             }
         }
 
+        public void ValidateTaxRate(string newTextValue)
+        {
+            string validText = new string(newTextValue.Where(c => char.IsDigit(c) || c == '.').ToArray());
+
+            if (validText.Count(c => c == '.') > 1)
+            {
+                validText = validText.Substring(0, validText.LastIndexOf('.'));
+            }
+
+            if (validText == ".")
+            {
+                validText = string.Empty;
+            }
+
+            if (TempTaxRate != validText)
+            {
+                TempTaxRate = validText;
+            }
+        }
+
+
         public ConfigViewModel()
         {
-            TaxRate = 0.07m;
-            TempTaxRate = 0.07m;
+            _taxRate = 7;
+            _tempTaxRate = "7";
         }
 
         public void UpdateTax()
         {
-            TaxRate = TempTaxRate;
-            _cartSvc.TaxRate = TaxRate;
+            if (!string.IsNullOrWhiteSpace(TempTaxRate))
+            {
+                TaxRate = decimal.Parse(TempTaxRate);
+                TempTaxRate = TaxRate.ToString();
+                _cartSvc.TaxRate = TaxRate;
+            }
+            else ResetTax();
         }
+
 
         public void ResetTax()
         {
-            TempTaxRate = TaxRate;
+            TempTaxRate = TaxRate.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

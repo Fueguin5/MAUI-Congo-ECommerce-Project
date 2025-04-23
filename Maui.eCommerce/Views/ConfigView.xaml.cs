@@ -7,7 +7,7 @@ public partial class ConfigView : ContentPage
 	public ConfigView()
 	{
 		InitializeComponent();
-	}
+    }
 
     protected override void OnAppearing()
     {
@@ -26,5 +26,10 @@ public partial class ConfigView : ContentPage
     {
         (BindingContext as ConfigViewModel)?.ResetTax();
         Shell.Current.GoToAsync("//MainPage");
+    }
+
+    private void OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        (BindingContext as ConfigViewModel)?.ValidateTaxRate(e.NewTextValue);
     }
 }

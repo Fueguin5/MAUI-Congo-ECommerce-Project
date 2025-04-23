@@ -1,50 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Maui.eCommerce.Views.ShoppingManagementView"
-             Title="ShoppingManagementView">
+             x:Class="Maui.eCommerce.Views.ShoppingManagementView">
 
     <Grid Margin="0,3">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- Sort Section-->
             <RowDefinition Height="*"/>
-            <!-- For inventory and shopping cart tables -->
             <RowDefinition Height="Auto"/>
-            <!-- For the + and - buttons -->
             <RowDefinition Height="Auto"/>
-            <!-- For the Checkout button -->
             <RowDefinition Height="Auto"/>
-            <!-- For the Go Back button -->
         </Grid.RowDefinitions>
 
-        <!-- Sort Section -->
-        <Grid Grid.Row="0" Margin="3,3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Text="Sort By Id" Grid.Column="0" Clicked="IdClicked" Margin="3,0"/>
-            <Button Text="Sort By Name" Grid.Column="1" Clicked="NameClicked" Margin="3,0"/>
-            <Button Text="Sort By Price" Grid.Column="2" Clicked="PriceClicked" Margin="3,0"/>
-        </Grid>
-
-        <Grid ColumnSpacing="0" Grid.Row="1" RowSpacing="0" Margin="3,3">
+        <Grid ColumnSpacing="0" Grid.Row="0" RowSpacing="0" Margin="3,3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <!-- Store Column -->
                 <ColumnDefinition Width="*"/>
-                <!-- Shopping Cart Column -->
             </Grid.ColumnDefinitions>
 
             <!-- STORE -->
             <Grid Grid.Row="0" Grid.Column="0" Margin="3,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Store Label -->
                     <RowDefinition Height="*"/>
-                    <!-- Store Table -->
                 </Grid.RowDefinitions>
 
                 <!-- Store Label -->
@@ -55,9 +32,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <!-- Header Row -->
                             <RowDefinition Height="*"/>
-                            <!-- Data Rows -->
                         </Grid.RowDefinitions>
 
                         <!-- Header Row -->
@@ -70,6 +45,7 @@
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
+                            
                             <Label Text="ID" Grid.Column="0" HorizontalOptions="Start" Padding="5,5"/>
                             <Label Text="Name" Grid.Column="1" HorizontalOptions="Start" Padding="5,5"/>
                             <Label Text="Price" Grid.Column="2" HorizontalOptions="Start" Padding="5,5"/>
@@ -81,7 +57,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <Frame Margin="5" Padding="0" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent" CornerRadius="5">
+                                        <Frame Margin="0,3" Padding="0" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="1*"/>
@@ -91,6 +67,7 @@
                                                     <ColumnDefinition Width="3*"/>
                                                     <ColumnDefinition Width="3*"/>
                                                 </Grid.ColumnDefinitions>
+                                                
                                                 <Label Text="{Binding Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
                                                 <Label Text="{Binding Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
                                                 <Label Text="{Binding Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
@@ -111,9 +88,7 @@
             <Grid Grid.Row="0" Grid.Column="1" Margin="3,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Shopping Cart Label -->
                     <RowDefinition Height="*"/>
-                    <!-- Shopping Cart Table -->
                 </Grid.RowDefinitions>
 
                 <!-- Shopping Cart Label -->
@@ -124,9 +99,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <!-- Header Row -->
                             <RowDefinition Height="*"/>
-                            <!-- Data Rows -->
                         </Grid.RowDefinitions>
 
                         <!-- Header Row -->
@@ -150,7 +123,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <Frame Margin="5" Padding="0" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent" CornerRadius="5">
+                                        <Frame Margin="0,3" Padding="0" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="1*"/>
@@ -160,6 +133,7 @@
                                                     <ColumnDefinition Width="3*"/>
                                                     <ColumnDefinition Width="3*"/>
                                                 </Grid.ColumnDefinitions>
+                                                
                                                 <Label Text="{Binding InventoryItem.Id}" Grid.Column="0" HorizontalOptions="Start" Padding="5,0"/>
                                                 <Label Text="{Binding InventoryItem.Product.Name}" Grid.Column="1" HorizontalOptions="Start" Padding="5,0"/>
                                                 <Label Text="{Binding InventoryItem.Product.Price, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" Padding="5,0"/>
@@ -177,34 +151,29 @@
             </Grid>
         </Grid>
 
-        <!-- + and - buttons row -->
-        <Grid Grid.Row="2" ColumnSpacing="0" RowSpacing="0" Margin="3,3">
+        <!-- Sort Section -->
+        <Grid Grid.Row="1" Margin="3,3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            <Button Text="+" Grid.Column="0" Clicked="AddToCartClicked" Margin="3,0"/>
-            <Button Text="-" Grid.Column="1" Clicked="RemoveFromCartClicked" Margin="3,0"/>
+            <Button Text="Sort By Id" Grid.Column="0" Clicked="IdClicked" Margin="3,0"/>
+            <Button Text="Sort By Name" Grid.Column="1" Clicked="NameClicked" Margin="3,0"/>
+            <Button Text="Sort By Price" Grid.Column="2" Clicked="PriceClicked" Margin="3,0"/>
         </Grid>
 
         <!-- Checkout button row -->
-        <Grid Grid.Row="3" ColumnSpacing="0" RowSpacing="0" Margin="6,3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Text="Checkout" Grid.Column="0" Clicked="CheckoutClicked"/>
-        </Grid>
+        <Button Grid.Row="2" 
+                Text="Checkout" 
+                Clicked="CheckoutClicked" 
+                Margin="6,3" />
 
         <!-- Go Back button row -->
-        <Grid Grid.Row="4" ColumnSpacing="0" RowSpacing="0" Margin="6,3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Text="Go Back" Grid.Column="0" Clicked="CancelClicked"/>
-        </Grid>
+        <Button Grid.Row="3" 
+                Text="Go Back" 
+                Clicked="CancelClicked" 
+                Margin="6,3" />
 
     </Grid>
 </ContentPage>

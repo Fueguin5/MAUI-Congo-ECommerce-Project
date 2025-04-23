@@ -35,7 +35,7 @@ namespace Library.eCommerce.Services
         private ShoppingCartService()
         {
             items = new List<CartItem>();
-            TaxRate = 0.07m;
+            TaxRate = 7;
         }
 
         public CartItem? AddOrUpdate(Item item)
@@ -83,8 +83,8 @@ namespace Library.eCommerce.Services
         public void CleanupCartItems()
         {
             items = items
-                .Where(ci => _prodSvc.GetById(ci.InventoryItem.Id) != null) // Remove orphaned items
-                .OrderBy(ci => ci.InventoryItem.Id) // Sort by InventoryItem Id
+                .Where(ci => _prodSvc.GetById(ci.InventoryItem.Id) != null)
+                .OrderBy(ci => ci.InventoryItem.Id)
                 .ToList();
         }
 

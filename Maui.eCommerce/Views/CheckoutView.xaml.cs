@@ -13,11 +13,11 @@ public partial class CheckoutView : ContentPage
     {
         base.OnAppearing();
 
-        (BindingContext as CheckoutViewModel).RefreshUX();
+        (BindingContext as CheckoutViewModel)?.RefreshUX();
     }
     private void ConfirmClicked(object sender, EventArgs e)
     {
-        (BindingContext as CheckoutViewModel).CheckoutCart();
+        (BindingContext as CheckoutViewModel)?.CheckoutCart();
         Shell.Current.GoToAsync("//MainPage");
     }
 

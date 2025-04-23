@@ -33,24 +33,14 @@ public partial class ShoppingManagementView : ContentPage
         (BindingContext as ShoppingManagementViewModel)?.SortByPrice();
     }
 
-    private void RemoveFromCartClicked(object sender, EventArgs e)
-    {
-        (BindingContext as ShoppingManagementViewModel).ReturnItem();
-    }
-
-    private void AddToCartClicked(object sender, EventArgs e)
-    {
-		(BindingContext as ShoppingManagementViewModel).PurchaseItem();
-    }
-
     private void InlineAddClicked(object sender, EventArgs e)
     {
-        (BindingContext as ShoppingManagementViewModel).PurchaseQuantity();
+        (BindingContext as ShoppingManagementViewModel)?.PurchaseQuantity();
     }
 
     private void InlineRemoveClicked(object sender, EventArgs e)
     {
-        (BindingContext as ShoppingManagementViewModel).ReturnQuantity();
+        (BindingContext as ShoppingManagementViewModel)?.ReturnQuantity();
     }
 
     private void CancelClicked(object sender, EventArgs e)
@@ -67,7 +57,7 @@ public partial class ShoppingManagementView : ContentPage
     {
         if (sender is Entry entry && entry.BindingContext is Item item)
         {
-            (BindingContext as ShoppingManagementViewModel).InventoryEntryClicked(item);
+            (BindingContext as ShoppingManagementViewModel)?.InventoryEntryClicked(item);
         }
     }
 
@@ -75,7 +65,7 @@ public partial class ShoppingManagementView : ContentPage
     {
         if (sender is Entry entry && entry.BindingContext is CartItem cartitem)
         {
-            (BindingContext as ShoppingManagementViewModel).ShoppingEntryClicked(cartitem);
+            (BindingContext as ShoppingManagementViewModel)?.ShoppingEntryClicked(cartitem);
         }
     }
 }
