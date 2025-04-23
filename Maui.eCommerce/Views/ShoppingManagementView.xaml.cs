@@ -17,10 +17,12 @@ public partial class ShoppingManagementView : ContentPage
 
         (BindingContext as ShoppingManagementViewModel)?.RefreshUX();
     }
+
     private void RemoveFromCartClicked(object sender, EventArgs e)
     {
         (BindingContext as ShoppingManagementViewModel).ReturnItem();
     }
+
     private void AddToCartClicked(object sender, EventArgs e)
     {
 		(BindingContext as ShoppingManagementViewModel).PurchaseItem();

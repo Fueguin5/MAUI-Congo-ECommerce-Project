@@ -2,11 +2,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui.eCommerce.Views.ConfigView"
-             Title="Config"
+             Title="Configuration"
              xmlns:viewmodels="clr-namespace:Maui.eCommerce.ViewModels">
 
     <ContentPage.BindingContext>
         <viewmodels:ConfigViewModel />
     </ContentPage.BindingContext>
 
+    <Grid Margin="6,3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Label Text="Tax Configuration"
+               FontSize="20"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Padding="10"
+               Grid.Row="0"/>
+
+        <!-- Main Content Area -->
+        <Border Grid.Row="1" Stroke="#AC99EA" StrokeThickness="2" Padding="15" Margin="0,3" StrokeShape="RoundRectangle 10,10,10,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Label -->
+                <Label Text="Tax Rate (%)"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalOptions="Center"
+                       Padding="3,3"/>
+
+                <!-- Entry -->
+                <Entry Text="{Binding TempTaxRate, StringFormat='{0:F2}', Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       Margin="3,3"/>
+            </Grid>
+        </Border>
+
+        <!-- OK Button -->
+        <Button Text="OK"
+                Grid.Row="2"
+                Margin="0,3"
+                Clicked="OkClicked"/>
+
+        <!-- Cancel Button -->
+        <Button Text="Go Back"
+                Grid.Row="3"
+                Margin="0,3"
+                Clicked="CancelClicked"/>
+    </Grid>
 </ContentPage>
