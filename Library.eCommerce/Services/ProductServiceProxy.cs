@@ -18,7 +18,7 @@ namespace Library.eCommerce.Services
                 new Item{ Product = new ProductDTO{Id = 1, Name ="Skateboard", Price = 99.95m}, Id = 1, Quantity = 5 },
                 new Item{ Product = new ProductDTO{Id = 2, Name ="Butterfly Knife", Price = 254.99m}, Id = 2, Quantity = 1 },
                 new Item{ Product = new ProductDTO{Id = 3, Name ="Magic The Gathering Bloomburrow Play Booster Box", Price = 160.99m}, Id = 3, Quantity = 4 },
-                new Item{ Product = new ProductDTO{Id = 4, Name ="Flow Star", Price = 80.00m}, Id = 3, Quantity = 0 }
+                new Item{ Product = new ProductDTO{Id = 4, Name ="Flow Star", Price = 80.00m}, Id = 4, Quantity = 0 }
             };
         }
 
