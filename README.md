@@ -6,7 +6,9 @@
 
 ## Overview
 
-This application simulates a basic e-commerce experience in which users can browse products, manage a shopping cart, and view a model checkout page displaying subtotal, tax, and total calculations. The system also includes functionality for modifying product data and database-related settings. The project was originally developed as part of a semester-long full-stack development course, where the goal was to design and implement a simplified model of a large-scale online marketplace (specifically Amazon, hence it being named after the Congo rainforest).
+This application simulates a basic e-commerce experience in which users can browse products, manage a shopping cart, and view a model checkout page displaying subtotal, tax, and total calculations. The system also includes functionality for modifying product data and database-related settings.
+
+The project was originally developed as part of a semester-long full-stack development course, where the goal was to design and implement a simplified model of a large-scale online marketplace (specifically Amazon, hence it being named after the Congo rainforest).
 
 ---
 
@@ -30,7 +32,7 @@ This application simulates a basic e-commerce experience in which users can brow
 
 ---
 
-## Tech Stack
+## Technical Details
 
 | Area         | Technology                                    |
 |--------------|-----------------------------------------------|
