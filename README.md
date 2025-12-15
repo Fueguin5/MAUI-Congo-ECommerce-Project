@@ -46,4 +46,4 @@ The project was originally developed as part of a semester-long full-stack devel
 
 ## Demo
 
-- to be added
+https://youtu.be/H-gqpy9Fg2E
